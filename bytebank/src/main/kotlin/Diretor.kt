@@ -9,7 +9,7 @@ class Diretor(
     cpf = cpf,
     salario = salario
 ) {
-    override val bonificacao get() = salario * 0.4
+    override val bonificacao get() = salario + plr
 
     fun autentica(senha: Int): Boolean {
         if(this.senha == senha) {
