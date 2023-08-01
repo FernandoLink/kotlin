@@ -1,9 +1,9 @@
 fun testaCopiasEReferencias(){
-    val contaLink = Conta(titular = "Link", numero = 1234)
+    val contaLink = ContaCorrente(titular = "Link", numero = 1234)
     contaLink.deposita(1000.0)
     println(contaLink.titular)
 
-    val contaVal = Conta(numero = 2345, titular = "Valéria")
+    val contaVal = ContaPoupanca(numero = 2345, titular = "Valéria")
     contaVal.deposita(2000.0)
     println(contaVal.titular)
 
@@ -14,8 +14,8 @@ fun testaCopiasEReferencias(){
     println("numeroX: $numeroX")
     println("numeroY: $numeroY")
 
-    val contaLuiza = Conta("Luiza", 3456)
-    val contaHenrique = Conta("henrique")
+    val contaLuiza = ContaCorrente("Luiza", 3456)
+    val contaHenrique = ContaPoupanca("henrique", 6789)
 
     println("contaLuiza: ${contaLuiza.titular}")
     println("contaHenrique: ${contaHenrique.titular}")
