@@ -1,37 +1,29 @@
 package br.com.alura.bytebank
 
-import br.com.alura.bytebank.modelo.*
-import br.com.alura.bytebank.teste.testaAutenticacao
-import br.com.alura.bytebank.teste.testaContasDiferentes
-import java.lang.String as StringJava
+import br.com.alura.bytebank.modelo.Endereco
+import br.com.alura.bytebank.teste.testaFuncionarios
+import br.com.alura.bytebank.teste.testaObjects
 
 fun main() {
 
-    val palavra: kotlin.String = "Fernando"
-    val palavraJava: StringJava = StringJava("Valeria")
+    val endereco = Endereco(logradouro = "Rua Vergueiro", complemento = "Alura")
 
-    println(palavra)
-    println(palavraJava)
+    imprime(1)
+    imprime(1.0)
+    imprime(true)
+    imprime("teste")
+    val teste = imprime(endereco)
+    println(teste)
+    imprime(Unit)
+    imprime(Any())
 
-    val fran = object: Autenticavel {
-        val nome: String = "Fran"
-        val cpf: String = "111.111.111-11"
-        val senha: Int = 1000
+    testaFuncionarios()
 
-        override fun autentica(senha: Int) = this.senha == senha
-    }
+    println("${endereco.javaClass}@${Integer.toHexString(endereco.hashCode())}")
 
-    println("nome do cliente ${fran.nome}")
+}
 
-    val sistemaInterno = SistemaInterno()
-    sistemaInterno.entra(fran, 1000)
-
-    val link = Cliente(nome = "Link", cpf = "816.289.279-68", senha = 1234)
-    val contaPoupanca = ContaPoupanca(titular = link, numero = 1000)
-    val contaCorrente = ContaCorrente(titular = link, numero = 1001)
-
-    testaAutenticacao()
-    testaContasDiferentes()
-
-    println("Total de Contas: ${Conta.total}")
+fun imprime(valor: Any) : Any{
+    println(valor)
+    return valor
 }
