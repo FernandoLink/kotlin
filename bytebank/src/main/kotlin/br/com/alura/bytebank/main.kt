@@ -1,6 +1,8 @@
 package br.com.alura.bytebank
 
+import br.com.alura.bytebank.exception.SaldoInsuficienteException
 import br.com.alura.bytebank.modelo.Endereco
+import br.com.alura.bytebank.teste.testeExpressao
 
 fun main() {
     println("início main")
@@ -10,21 +12,22 @@ fun main() {
 
 fun funcao1(){
     println("início funcao1")
-    funcao2()
+    try {
+        funcao2()
+    } catch(e: SaldoInsuficienteException){
+        println("Saldo Insuficiente Exception")
+    }
     println("fin funcao1")
 }
 
 fun funcao2(){
     println("início funcao2")
-    try {
-        for (i in 1..5){
-            println(i)
-            val endereco = Any()
-            endereco as Endereco
-        }
-    } catch(e: ClassCastException) {
-        println("ClassCastException foi pegada")
+    for (i in 1..5){
+        println(i)
+        throw SaldoInsuficienteException()
     }
     println("fim funcao2")
 }
+
+
 
