@@ -12,48 +12,49 @@ fun main() {
     println(idades.average())
     println(idades.all { it >= 18 })
     println(idades.any { it <= 18 })
-    println(idades.filter { it >= 18})
-    println(idades.find { it >= 50})
+    println(idades.filter { it >= 18 })
+    println(idades.find { it >= 50 })
+    println(idades.sum())
     println(Int.MAX_VALUE)
     println(Int.MIN_VALUE)
     println(Int.SIZE_BITS)
     println(Int.SIZE_BYTES)
 
     val salarios: DoubleArray = doubleArrayOf(10000.0, 11000.0, 12000.0, 16000.0)
-    for(indice in salarios.indices){
+    for (indice in salarios.indices) {
         salarios[indice] += salarios[indice] * 0.1
     }
     println(salarios.contentToString())
-    salarios.forEachIndexed() { i, salario -> salarios[i] += salario * 0.1}
+    salarios.forEachIndexed() { i, salario -> salarios[i] += salario * 0.1 }
     println(salarios.contentToString())
 
     val contatos = arrayOf("Roberto", "Ana", "Paula")
 
     var serie: IntRange = 1.rangeTo(10)
-    for(s in serie){
+    for (s in serie) {
         print("$s ")
     }
 
     println()
     var numerosPares = 2..100 step 2
-    for(par in numerosPares){
+    for (par in numerosPares) {
         print("$par ")
     }
 
     println()
     numerosPares = 2.until(100) step 2
-    for(par in numerosPares){
+    for (par in numerosPares) {
         print("$par ")
     }
 
     println()
     val reverso = 100 downTo 0 step 5
-    reverso.forEach{ print("$it ")}
+    reverso.forEach { print("$it ") }
 
     println()
     val intervalo = 1500.0..5000.0
     val salario = 4000.0
-    if (salario in intervalo){
+    if (salario in intervalo) {
         println(true)
     } else {
         println(false)
@@ -61,21 +62,26 @@ fun main() {
 
     val alfabeto = 'a'..'z'
     val letra = 'k'
-    if(letra in alfabeto){
+    if (letra in alfabeto) {
         println(true)
     } else {
         println(false)
     }
 
-    val sal = bigDecimalArrayOf("16000.0", "20000.0", "30000.0")
+    val sal = bigDecimalArrayOf("16000.0", "20000.0", "30000.0", "40000.0", "50000.0")
     println(sal.contentToString())
     val aumento = "1.1".toBigDecimal()
-    val salariosComAumento: Array<BigDecimal> = sal.map { salario -> (salario * aumento).setScale(2, RoundingMode.UP) }.toTypedArray()
+    val salariosComAumento: Array<BigDecimal> =
+        sal.map { salario -> (salario * aumento).setScale(2, RoundingMode.UP) }.toTypedArray()
     println(salariosComAumento.contentToString())
 
+    val gastoInicial = sal.somatoria()
+    println(gastoInicial)
+    val meses = 6.toBigDecimal()
+    println(sal.fold(gastoInicial) { acumulador, salario -> acumulador + (salario * meses).setScale(2, RoundingMode.UP)})
 
+    println(sal.sorted().take(3))
+    println(sal.sorted().takeLast(3).toTypedArray().media())
 }
 
-fun bigDecimalArrayOf(vararg valores: String): Array<BigDecimal> {
-    return Array<BigDecimal>(valores.size) { i -> valores[i].toBigDecimal() }
-}
+
