@@ -1,10 +1,9 @@
 package br.com.alura.bytebank.collections
 
-fun main() {
-    val assistiramCursoAndroid = setOf("Link", "Valeria", "Luiza", "Henrique", "Alex", "Maria")
-    val assistiramCursoKotlin = listOf("Alex", "Paulo", "Maria")
+import java.lang.NullPointerException
+import br.com.alura.bytebank.collections.testaSet
 
-    val assistiramAmbos = assistiramCursoAndroid + assistiramCursoKotlin
-    println(assistiramAmbos.distinct())
+fun main() {
+    testaAssociateMap()
 }
 
