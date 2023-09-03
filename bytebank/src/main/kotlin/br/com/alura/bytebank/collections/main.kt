@@ -1,42 +1,27 @@
 package br.com.alura.bytebank.collections
 
-import java.lang.NullPointerException
-import br.com.alura.bytebank.collections.testaSet
+import br.com.alura.bytebank.modelo.Endereco
+import java.util.*
 
 fun main() {
-    println(soma(1,5))
+    Endereco(logradouro = "rua vergueiro", numero = 3185).apply {
+        "${logradouro}, ${numero}".uppercase(Locale.getDefault())
+    }.let(::println)
 
-    val minhaFuncao = ::soma2
-    println(minhaFuncao(1, 2))
+    listOf(
+        Endereco(complemento = "casa"),
+        Endereco(),
+        Endereco(complemento = "apartamento")
+    ).filter { endereco -> endereco.complemento.isNotEmpty() }
+    .let(::println)
 
-    val minhaFuncaoClasse = Teste()
-    println(minhaFuncaoClasse())
-
-    val teste = Teste()
-    teste(10)
-
-    val minhaFuncaoLambda= {
-        println("Executa com lambada")
+    soma(1, 5) {
+        println(it)
     }
-    println(minhaFuncaoLambda())
-
-    val minhaFuncaoAnonima: () -> Unit = fun(){
-        println("Executa como anonima")
-    }
-    println(minhaFuncaoAnonima())
 }
-fun soma(a: Int, b: Int) : Int = a + b
-
-fun soma2(a: Int, b: Int): Int{
-    return a + b
+fun soma(a: Int, b: Int, resultado: (Int) -> Unit) {
+    println("antes da soma")
+    resultado(a + b)
+    println("depois da soma")
 }
 
-class Teste : () -> Unit {
-    override fun invoke() {
-        println("executa invoke do teste")
-    }
-    operator fun invoke(valor: Int){
-        println(valor)
-    }
-
-}
