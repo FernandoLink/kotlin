@@ -13,6 +13,7 @@ data class Jogo(val titulo:String,
         return "Meu Jogo: \n" +
                 "Título: $titulo \n" +
                 "Capa: $capa \n" +
+                "Preço: $preco \n" +
                 "Descricao: $descricao"
 
         "Descricao: $descricao" +

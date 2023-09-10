@@ -1,5 +1,6 @@
 package br.com.flink.alugames.modelo
 
+import java.time.LocalDate
 import kotlin.random.Random
 import java.util.Scanner
 
@@ -15,8 +16,7 @@ data class Gamer(var nome:String, var email:String) {
     var idInterno:String? = null
         private set
     val jogosBuscados = mutableListOf<Jogo?>()
-
-    //código omitido
+    val jogosAlugados = mutableListOf<Aluguel>()
 
     constructor(nome: String, email: String, dataNascimento:String, usuario:String):
             this(nome, email) {
@@ -51,8 +51,10 @@ data class Gamer(var nome:String, var email:String) {
         }
     }
 
-    fun alugaJogo(jogo: Jogo): Aluguel {
-        return Aluguel(this, jogo)
+    fun alugaJogo(jogo: Jogo, periodo: Periodo): Aluguel {
+        val aluguel = Aluguel(this, jogo, periodo)
+        jogosAlugados.add(aluguel)
+        return aluguel
     }
 
     companion object {
