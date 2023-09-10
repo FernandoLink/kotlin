@@ -14,6 +14,13 @@ fun main() {
         "flink"
     )
 
+    gamer1.let {
+        it.dataNascimento = "22/04/1970"
+        it.usuario = "flink"
+    }.also {
+        println(gamer1.idInterno)
+    }
+
     println(gamer1)
     println(gamer2)
 }
