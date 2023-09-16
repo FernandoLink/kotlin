@@ -1,6 +1,7 @@
 package br.com.flink.alugames.principal
 
 import br.com.flink.alugames.modelo.Periodo
+import br.com.flink.alugames.modelo.PlanoAssinatura
 import br.com.flink.alugames.servicos.ConsumoApi
 import java.time.LocalDate
 
@@ -11,17 +12,23 @@ fun main() {
 
     val gamerCaroline = listaGamers.get(3)
     val jogoResidenteVillage = listaJogoJson.get(10)
-    val jogo2 = listaJogoJson.get(13)
-    val jogo3 = listaJogoJson.get(2)
+    val jogoSpiderMan = listaJogoJson.get(13)
+    val jogoTheLastOfUs = listaJogoJson.get(2)
 
     val periodo1 = Periodo(LocalDate.now(), LocalDate.now().plusDays(7))
     val periodo2 = Periodo(LocalDate.now(), LocalDate.now().plusDays(3))
     val periodo3 = Periodo(LocalDate.now(), LocalDate.now().plusDays(10))
 
     gamerCaroline.alugaJogo(jogoResidenteVillage, periodo1)
-    gamerCaroline.alugaJogo(jogo2, periodo2)
-    gamerCaroline.alugaJogo(jogo3, periodo3)
-
+    gamerCaroline.alugaJogo(jogoSpiderMan, periodo2)
+    gamerCaroline.alugaJogo(jogoTheLastOfUs, periodo3)
     println(gamerCaroline.jogosAlugados)
 
+    val gamerCamila = listaGamers.get(5)
+    gamerCamila.plano = PlanoAssinatura("PRATA", 9.90, 3)
+    gamerCamila.alugaJogo(jogoResidenteVillage, periodo1)
+    gamerCamila.alugaJogo(jogoSpiderMan, periodo2)
+    gamerCamila.alugaJogo(jogoTheLastOfUs, periodo3)
+    gamerCamila.alugaJogo(jogoTheLastOfUs, periodo3)
+    println(gamerCamila.jogosAlugados)
 }
