@@ -1,8 +1,12 @@
-package br.com.flink.alugames.servicos
+package br.com.alura.alugames.servicos
 
-import br.com.flink.alugames.modelo.*
-import br.com.flink.alugames.utilitario.criaGamer
-import br.com.flink.alugames.utilitario.criaJogo
+import br.com.alura.alugames.modelo.Gamer
+import br.com.alura.alugames.modelo.InfoGamerJson
+import br.com.alura.alugames.modelo.InfoJogo
+import br.com.alura.alugames.modelo.InfoJogoJson
+import br.com.alura.alugames.modelo.Jogo
+import br.com.alura.alugames.utilitario.criaGamer
+import br.com.alura.alugames.utilitario.criaJogo
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.net.URI
@@ -19,25 +23,31 @@ class ConsumoApi {
             .build()
         val response = client
             .send(request, HttpResponse.BodyHandlers.ofString())
+
         return response.body()
     }
 
-    fun buscaJogo(id: String):InfoJogo{
+    fun buscaJogo(id:String): InfoJogo {
         val endereco = "https://www.cheapshark.com/api/1.0/games?id=$id"
+        val json = consomeDados(endereco)
+
         val gson = Gson()
-        val meuInfoJogo = gson.fromJson(consomeDados(endereco), InfoJogo::class.java)
+        val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
+
         return meuInfoJogo
+
     }
 
     fun buscaGamers(): List<Gamer> {
         val endereco = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
+        val json = consomeDados(endereco)
+
         val gson = Gson()
         val meuGamerTipo = object : TypeToken<List<InfoGamerJson>>() {}.type
-        val listaGamer:List<InfoGamerJson> = gson.fromJson(consomeDados(endereco), meuGamerTipo)
+        val listaGamer:List<InfoGamerJson> = gson.fromJson(json, meuGamerTipo)
 
-        val listaGamerConvertida = listaGamer.map {
-            infoGamerJson -> infoGamerJson.criaGamer()
-        }
+        val listaGamerConvertida = listaGamer.map { infoGamerJson -> infoGamerJson.criaGamer() }
+
         return listaGamerConvertida
     }
 
@@ -53,4 +63,5 @@ class ConsumoApi {
 
         return listaJogoConvertida
     }
+
 }

@@ -1,18 +1,19 @@
-package br.com.flink.alugames.modelo
+package br.com.alura.alugames.modelo
 
 import java.time.LocalDate
-import kotlin.random.Random
 import java.util.Scanner
+import kotlin.random.Random
 
 data class Gamer(var nome:String, var email:String): Recomendavel {
     var dataNascimento:String? = null
     var usuario:String? = null
         set(value) {
             field = value
-            if (idInterno.isNullOrBlank()){
+            if(idInterno.isNullOrBlank()) {
                 criarIdInterno()
             }
         }
+    var id = 0
     var idInterno:String? = null
         private set
     var plano: Plano = PlanoAvulso("BRONZE")
@@ -25,46 +26,52 @@ data class Gamer(var nome:String, var email:String): Recomendavel {
         get() = listaNotas.average()
 
     override fun recomendar(nota: Int) {
-        if (nota < 1 || nota > 10) {
-            println("Nota inválida. Insira uma nota entre 1 e 10")
-        } else {
-            listaNotas.add(nota)
-        }
+        listaNotas.add(nota)
     }
 
-    fun recomendarJogo(jogo: Jogo, nota: Int){
+    fun recomendarJogo(jogo: Jogo, nota: Int) {
         jogo.recomendar(nota)
+        jogosRecomendados.add(jogo)
     }
 
-    constructor(nome: String, email: String, dataNascimento:String, usuario:String):
+    constructor(nome: String, email: String, dataNascimento:String?, usuario:String?, id: Int = 0):
             this(nome, email) {
         this.dataNascimento = dataNascimento
         this.usuario = usuario
+        this.id = id
         criarIdInterno()
     }
 
-    init{
-        if(nome.isNullOrBlank()){
+    init {
+        if (nome.isNullOrBlank()) {
             throw IllegalArgumentException("Nome está em branco")
         }
         this.email = validarEmail()
     }
 
     override fun toString(): String {
-        return "Gamer(nome='$nome', email='$email', dataNascimento=$dataNascimento, usuario=$usuario, idInterno=$idInterno, reputacao=$media)"
+        return "Gamer:\n" +
+                "Nome: $nome\n" +
+                "Email: $email\n" +
+                "Data Nascimento: $dataNascimento\n" +
+                "Usuario: $usuario\n" +
+                "IdInterno: $idInterno\n" +
+                "Reputação: $media\n" +
+                "Id: $id"
     }
 
     fun criarIdInterno() {
         val numero = Random.nextInt(10000)
         val tag = String.format("%04d", numero)
+
         idInterno = "$usuario#$tag"
     }
 
-    fun validarEmail(): String{
-        val regex = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}")
-        if(regex.matches(email)){
+    fun validarEmail(): String {
+        val regex = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
+        if (regex.matches(email)) {
             return email
-        } else{
+        } else {
             throw IllegalArgumentException("Email inválido")
         }
     }
@@ -72,6 +79,7 @@ data class Gamer(var nome:String, var email:String): Recomendavel {
     fun alugaJogo(jogo: Jogo, periodo: Periodo): Aluguel {
         val aluguel = Aluguel(this, jogo, periodo)
         jogosAlugados.add(aluguel)
+
         return aluguel
     }
 
@@ -100,6 +108,8 @@ data class Gamer(var nome:String, var email:String): Recomendavel {
             } else {
                 return Gamer (nome, email)
             }
+
         }
     }
+
 }

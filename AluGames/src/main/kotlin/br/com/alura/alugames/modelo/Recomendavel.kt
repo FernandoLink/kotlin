@@ -1,4 +1,4 @@
-package br.com.flink.alugames.modelo
+package br.com.alura.alugames.modelo
 
 interface Recomendavel {
     val media: Double
