@@ -27,9 +27,13 @@ from
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="c3337608-ce63-4e3e-a046-ca8520aacd92" object-ref="schemas/alugames/tables/planos" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="c3337608-ce63-4e3e-a046-ca8520aacd92" dataset="alugames.planos" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="c3337608-ce63-4e3e-a046-ca8520aacd92" dataset="alugames.gamers" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="c3337608-ce63-4e3e-a046-ca8520aacd92" dataset="alugames.jogos" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">

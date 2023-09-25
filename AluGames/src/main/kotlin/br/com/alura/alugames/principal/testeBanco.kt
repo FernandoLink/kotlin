@@ -10,7 +10,11 @@ fun main() {
 
     val manager = Banco.getEntityManager()
     val jogoDAO = JogosDAO(manager)
-    jogoDAO.adicionar(jogo)
+    //jogoDAO.adicionar(jogo)
+
+    val jogoRecuperado = jogoDAO.recuperarPeloId(7)
+
+    jogoDAO.apagar(7)
 
     val listaJogos: List<Jogo> = jogoDAO.getLista()
     println(listaJogos)
