@@ -1,7 +1,6 @@
 package br.com.alura.alugames.dados
 
 import br.com.alura.alugames.modelo.Gamer
-import br.com.alura.alugames.modelo.Jogo
 import br.com.alura.alugames.utilitario.toEntity
 import br.com.alura.alugames.utilitario.toModel
 import javax.persistence.EntityManager
